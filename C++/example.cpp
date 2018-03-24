@@ -1,7 +1,7 @@
 // © 2018 Aaron Sami Abassi
 // Licensed under the Academic Free License version 3.0
 #include "fractionalization.hpp"
-#include <stdio.h>
+#include <cstdio>
 
 using namespace ::fractionalization;
 
