@@ -4,7 +4,7 @@ source fractionalization.tcl
 proc DisplayFraction {FractionArray} {
     array set Fraction $FractionArray
     puts -nonewline [format {%u} $Fraction(Numerator)]
-    if {$Fraction(Denominator) > 1} {
+    if {$Fraction(Denominator) != 1} {
         puts -nonewline [format {/%u} $Fraction(Denominator)]
     }
 }

@@ -234,7 +234,7 @@ Module Example
 
     Sub DisplayFraction(ByRef Fraction As Fractional)
         Console.Write(Fraction.Numerator)
-        If (Fraction.Denominator > 1) Then
+        If (Fraction.Denominator <> 1) Then
             Console.Write("/" & Fraction.Denominator)
         End If
     End Sub

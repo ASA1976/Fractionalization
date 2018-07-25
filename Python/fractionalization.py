@@ -1,3 +1,4 @@
+# coding: cp1252
 # © 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
 def Fractional( numerator = 0, denominator = 1 ):

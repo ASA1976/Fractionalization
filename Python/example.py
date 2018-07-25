@@ -1,9 +1,10 @@
+# coding: cp1252
 # © 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
 from fractionalization import Fractional, fast_operation, reducing_operation
 def display_fraction( fraction ):
     output = str( fraction.numerator )
-    if fraction.denominator > 1:
+    if fraction.denominator != 1:
         output += "/" + str( fraction.denominator )
     return output
 def display_arithmetic( base, symbol, relative, equals ):
