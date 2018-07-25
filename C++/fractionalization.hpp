@@ -463,7 +463,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Arithmetical< Natural >
+    static constexpr Arithmetical< Natural >
     FastArithmetic = {
         FastAdd< Natural >,
         FastSubtract< Natural >,
@@ -474,7 +474,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Arithmetical< Natural >
+    static constexpr Arithmetical< Natural >
     ReducingArithmetic = {
         ReducingAdd< Natural >,
         ReducingSubtract< Natural >,
@@ -485,7 +485,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Relational< Natural >
+    static constexpr Relational< Natural >
     FastRelation = {
         FastLesser< Natural >,
         FastGreater< Natural >,
@@ -498,7 +498,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Relational< Natural >
+    static constexpr Relational< Natural >
     ReducingRelation = {
         ReducingLesser< Natural >,
         ReducingGreater< Natural >,
@@ -511,7 +511,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Operational< Natural >
+    static constexpr Operational< Natural >
     FastOperation = {
         FastArithmetic< Natural >,
         FastRelation< Natural >
@@ -520,7 +520,7 @@ namespace fractionalization {
     template <
         typename Natural
     >
-    static const Operational< Natural >
+    static constexpr Operational< Natural >
     ReducingOperation = {
         ReducingArithmetic< Natural >,
         ReducingRelation< Natural >

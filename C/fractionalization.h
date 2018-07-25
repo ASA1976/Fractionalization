@@ -17,9 +17,9 @@ typedef struct fractional_s {
 
 } fractional;
 
-typedef fractional arithmetical_abstract(fractional, fractional);
+typedef fractional arithmetical_abstract(const fractional* const, const fractional* const);
 
-typedef boolean relational_abstract(fractional, fractional);
+typedef boolean relational_abstract(const fractional* const, const fractional* const);
 
 typedef struct arithmetical_s {
 
@@ -76,157 +76,157 @@ static natural least_common_multiple(const natural a, const natural b)
     return b / divisor * a;
 }
 
-static fractional reduce(const fractional fraction)
+static fractional reduce(const fractional* const fraction)
 {
     natural divisor;
     fractional result;
-    if (fraction.numerator == 0) {
+    if (fraction->numerator == 0) {
         result.numerator = 0;
         result.denominator = 1;
     } else {
-        divisor = greatest_common_divisor(fraction.numerator, fraction.denominator);
-        result.numerator = fraction.numerator / divisor;
-        result.denominator = fraction.denominator / divisor;
+        divisor = greatest_common_divisor(fraction->numerator, fraction->denominator);
+        result.numerator = fraction->numerator / divisor;
+        result.denominator = fraction->denominator / divisor;
     }
     return result;
 }
 
-static fractional fast_add(const fractional base, const fractional relative)
+static fractional fast_add(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.numerator = base.numerator * relative.denominator + relative.numerator * base.denominator;
-    result.denominator = base.denominator * relative.denominator;
+    result.numerator = base->numerator * relative->denominator + relative->numerator * base->denominator;
+    result.denominator = base->denominator * relative->denominator;
     return result;
 }
 
-static fractional fast_subtract(const fractional base, const fractional relative)
+static fractional fast_subtract(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.numerator = base.numerator * relative.denominator - relative.numerator * base.denominator;
-    result.denominator = base.denominator * relative.denominator;
+    result.numerator = base->numerator * relative->denominator - relative->numerator * base->denominator;
+    result.denominator = base->denominator * relative->denominator;
     return result;
 }
 
-static fractional fast_multiply(const fractional base, const fractional relative)
+static fractional fast_multiply(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.numerator = base.numerator * relative.numerator;
-    result.denominator = base.denominator * relative.denominator;
+    result.numerator = base->numerator * relative->numerator;
+    result.denominator = base->denominator * relative->denominator;
     return result;
 }
 
-static fractional fast_divide(const fractional base, const fractional relative)
+static fractional fast_divide(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.numerator = base.numerator * relative.denominator;
-    result.denominator = base.denominator * relative.numerator;
+    result.numerator = base->numerator * relative->denominator;
+    result.denominator = base->denominator * relative->numerator;
     return result;
 }
 
-static fractional reducing_add(const fractional base, const fractional relative)
+static fractional reducing_add(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.denominator = least_common_multiple( base.denominator, relative.denominator );
-    result.numerator = base.numerator * (result.denominator / base.denominator);
-    result.numerator += relative.numerator * (result.denominator / relative.denominator);
-    return reduce( result );
+    result.denominator = least_common_multiple( base->denominator, relative->denominator );
+    result.numerator = base->numerator * (result.denominator / base->denominator);
+    result.numerator += relative->numerator * (result.denominator / relative->denominator);
+    return reduce( &result );
 }
 
-static fractional reducing_subtract(const fractional base, const fractional relative)
+static fractional reducing_subtract(const fractional* const base, const fractional* const relative)
 {
     fractional result;
-    result.denominator = least_common_multiple( base.denominator, relative.denominator );
-    result.numerator = base.numerator * (result.denominator / base.denominator);
-    result.numerator -= relative.numerator * (result.denominator / relative.denominator);
-    return reduce( result );
+    result.denominator = least_common_multiple( base->denominator, relative->denominator );
+    result.numerator = base->numerator * (result.denominator / base->denominator);
+    result.numerator -= relative->numerator * (result.denominator / relative->denominator);
+    return reduce( &result );
 }
 
-static fractional reducing_multiply(const fractional base, const fractional relative)
+static fractional reducing_multiply(const fractional* const base, const fractional* const relative)
 {
     const natural
-        lnrd_divisor = greatest_common_divisor(base.numerator, relative.denominator),
-        ldrn_divisor = greatest_common_divisor(base.denominator, relative.numerator);
+        lnrd_divisor = greatest_common_divisor(base->numerator, relative->denominator),
+        ldrn_divisor = greatest_common_divisor(base->denominator, relative->numerator);
     fractional result;
-    result.numerator = (base.numerator / lnrd_divisor) * (relative.numerator / ldrn_divisor);
-    result.denominator = (base.denominator / ldrn_divisor) * (relative.denominator / lnrd_divisor);
+    result.numerator = (base->numerator / lnrd_divisor) * (relative->numerator / ldrn_divisor);
+    result.denominator = (base->denominator / ldrn_divisor) * (relative->denominator / lnrd_divisor);
     return result;
 }
 
-static fractional reducing_divide(const fractional base, const fractional relative)
+static fractional reducing_divide(const fractional* const base, const fractional* const relative)
 {
     const natural
-        lnrn_divisor = greatest_common_divisor(base.numerator, relative.numerator),
-        ldrd_divisor = greatest_common_divisor(base.denominator, relative.denominator);
+        lnrn_divisor = greatest_common_divisor(base->numerator, relative->numerator),
+        ldrd_divisor = greatest_common_divisor(base->denominator, relative->denominator);
     fractional result;
-    result.numerator = (base.numerator / lnrn_divisor) * (relative.denominator / ldrd_divisor);
-    result.denominator = (base.denominator / ldrd_divisor) * (relative.numerator / lnrn_divisor);
+    result.numerator = (base->numerator / lnrn_divisor) * (relative->denominator / ldrd_divisor);
+    result.denominator = (base->denominator / ldrd_divisor) * (relative->numerator / lnrn_divisor);
     return result;
 }
 
-static boolean fast_lesser(const fractional base, const fractional relative)
+static boolean fast_lesser(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator < relative.numerator * base.denominator;
+    return base->numerator * relative->denominator < relative->numerator * base->denominator;
 }
 
-static boolean fast_greater(const fractional base, const fractional relative)
+static boolean fast_greater(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator > relative.numerator * base.denominator;
+    return base->numerator * relative->denominator > relative->numerator * base->denominator;
 }
 
-static boolean fast_equal(const fractional base, const fractional relative)
+static boolean fast_equal(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator == relative.numerator * base.denominator;
+    return base->numerator * relative->denominator == relative->numerator * base->denominator;
 }
 
-static boolean fast_not_greater(const fractional base, const fractional relative)
+static boolean fast_not_greater(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator <= relative.numerator * base.denominator;
+    return base->numerator * relative->denominator <= relative->numerator * base->denominator;
 }
 
-static boolean fast_not_lesser(const fractional base, const fractional relative)
+static boolean fast_not_lesser(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator >= relative.numerator * base.denominator;
+    return base->numerator * relative->denominator >= relative->numerator * base->denominator;
 }
 
-static boolean fast_not_equal(const fractional base, const fractional relative)
+static boolean fast_not_equal(const fractional* const base, const fractional* const relative)
 {
-    return base.numerator * relative.denominator != relative.numerator * base.denominator;
+    return base->numerator * relative->denominator != relative->numerator * base->denominator;
 }
 
-static boolean reducing_lesser(const fractional base, const fractional relative)
+static boolean reducing_lesser(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) < relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) < relative->numerator * (factor / relative->denominator);
 }
 
-static boolean reducing_greater(const fractional base, const fractional relative)
+static boolean reducing_greater(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) > relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) > relative->numerator * (factor / relative->denominator);
 }
 
-static boolean reducing_equal(const fractional base, const fractional relative)
+static boolean reducing_equal(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) == relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) == relative->numerator * (factor / relative->denominator);
 }
 
-static boolean reducing_not_greater(const fractional base, const fractional relative)
+static boolean reducing_not_greater(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) <= relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) <= relative->numerator * (factor / relative->denominator);
 }
 
-static boolean reducing_not_lesser(const fractional base, const fractional relative)
+static boolean reducing_not_lesser(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) >= relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) >= relative->numerator * (factor / relative->denominator);
 }
 
-static boolean reducing_not_equal(const fractional base, const fractional relative)
+static boolean reducing_not_equal(const fractional* const base, const fractional* const relative)
 {
-    const natural factor = least_common_multiple( base.denominator, relative.denominator );
-    return base.numerator * (factor / base.denominator) != relative.numerator * (factor / relative.denominator);
+    const natural factor = least_common_multiple( base->denominator, relative->denominator );
+    return base->numerator * (factor / base->denominator) != relative->numerator * (factor / relative->denominator);
 }
 
 static const arithmetical

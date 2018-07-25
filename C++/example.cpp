@@ -14,7 +14,7 @@ DisplayFraction(
         fraction
 ) {
     printf( "%u", fraction.numerator );
-    if (fraction.denominator > 1)
+    if (fraction.denominator != 1)
         printf( "/%u", fraction.denominator );
 }
 
@@ -63,9 +63,9 @@ DisplayOperations(
     const NaturalFractional&
         relative
 ) {
-    const auto
+    const auto&
         arithmetic = operation.arithmetic;
-    const auto
+    const auto&
         relation = operation.relation;
     DisplayArithmetic( base, "+", relative, arithmetic.add( base, relative ) );
     DisplayArithmetic( base, "-", relative, arithmetic.subtract( base, relative ) );
@@ -81,9 +81,9 @@ DisplayOperations(
 
 int
 main() {
-    static auto
+    static auto&
         NaturalFastOperation = FastOperation< unsigned int >;
-    static auto
+    static auto&
         NaturalReducingOperation = ReducingOperation< unsigned int >;
     static const NaturalFractional
         X = {1, 6},
