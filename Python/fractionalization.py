@@ -1,23 +1,24 @@
 # coding: cp1252
 # © 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
+FractionalType = type( 'Fractional', (), {} ) 
+ArithmeticalType = type( 'Arithmetical', (), {} ) 
+RelationalType = type( 'Relational', (), {} ) 
+OperationalType = type( 'Operational', (), {} ) 
 def Fractional( numerator = 0, denominator = 1 ):
-    Fractional = type( 'Fractional', (), {} ) 
-    fraction = Fractional()
+    fraction = FractionalType()
     fraction.numerator = numerator
     fraction.denominator = denominator
     return fraction
 def Arithmetical( add, subtract, multiply, divide ):
-    Arithmetical = type( 'Arithmetical', (), {} ) 
-    arithmetic = Arithmetical()
+    arithmetic = ArithmeticalType()
     arithmetic.add = add
     arithmetic.subtract = subtract
     arithmetic.multiply = multiply
     arithmetic.divide = divide
     return arithmetic
 def Relational( lesser, greater, equal, not_greater, not_lesser, not_equal ):
-    Relational = type( 'Relational', (), {} ) 
-    relation = Relational()
+    relation = RelationalType()
     relation.lesser = lesser
     relation.greater = greater
     relation.equal = equal
@@ -26,8 +27,7 @@ def Relational( lesser, greater, equal, not_greater, not_lesser, not_equal ):
     relation.not_equal = not_equal
     return relation
 def Operational( arithmetic, relation ):
-    Operational = type( 'Operational', (), {} ) 
-    operation = Operational()
+    operation = OperationalType()
     operation.arithmetic = arithmetic
     operation.relation = relation
     return operation
