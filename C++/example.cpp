@@ -88,10 +88,10 @@ main() {
     static const NaturalFractional
         X = {1, 6},
         Y = {1, 12};
-    puts( "Fast NaturalFractional Operations" );
+    puts( "Fast Fractional Operations" );
     DisplayOperations( NaturalFastOperation, X, Y );
     puts( "" );
-    puts( "Reducing NaturalFractional Operations" );
+    puts( "Reducing Fractional Operations" );
     DisplayOperations( NaturalReducingOperation, X, Y );
     return 0;
 }
