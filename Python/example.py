@@ -27,16 +27,16 @@ def display_relation( base, symbol, relative, result ):
 def display_operations( operation, base, relative ):
     arithmetic = operation.arithmetic
     relation = operation.relation
-    display_arithmetic( base, "+", relative, arithmetic.add( x, y ) )
-    display_arithmetic( base, "-", relative, arithmetic.subtract( x, y ) )
-    display_arithmetic( base, "*", relative, arithmetic.multiply( x, y ) )
-    display_arithmetic( base, "/", relative, arithmetic.divide( x, y ) )
-    display_relation( base, "<", relative, relation.lesser( x, y ) )
-    display_relation( base, ">", relative, relation.greater( x, y ) )
-    display_relation( base, "==", relative, relation.equal( x, y ) )
-    display_relation( base, "<=", relative, relation.not_greater( x, y ) )
-    display_relation( base, ">=", relative, relation.not_lesser( x, y ) )
-    display_relation( base, "!=", relative, relation.not_equal( x, y ) )
+    display_arithmetic( base, "+", relative, arithmetic.add( base, relative ) )
+    display_arithmetic( base, "-", relative, arithmetic.subtract( base, relative ) )
+    display_arithmetic( base, "*", relative, arithmetic.multiply( base, relative ) )
+    display_arithmetic( base, "/", relative, arithmetic.divide( base, relative ) )
+    display_relation( base, "<", relative, relation.lesser( base, relative ) )
+    display_relation( base, ">", relative, relation.greater( base, relative ) )
+    display_relation( base, "==", relative, relation.equal( base, relative ) )
+    display_relation( base, "<=", relative, relation.not_greater( base, relative ) )
+    display_relation( base, ">=", relative, relation.not_lesser( base, relative ) )
+    display_relation( base, "!=", relative, relation.not_equal( base, relative ) )
 x = Fractional( 1, 6 )
 y = Fractional( 1, 12 )
 print "Fast Fractional Operations" 
