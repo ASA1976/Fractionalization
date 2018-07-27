@@ -1,5 +1,5 @@
-# coding: cp1252
-# © 2018 Aaron Sami Abassi
+# coding: utf-8
+# Â© 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
 from fractionalization import Fractional, fast_operation, reducing_operation
 def display_fraction( fraction ):
@@ -13,7 +13,7 @@ def display_arithmetic( base, symbol, relative, equals ):
     output += display_fraction( relative )
     output += " = "
     output += display_fraction( equals )
-    print output
+    print( output )
 def display_relation( base, symbol, relative, result ):
     output = display_fraction( base )
     output += " " + symbol + " "
@@ -23,7 +23,7 @@ def display_relation( base, symbol, relative, result ):
         output += "true"
     else:
         output += "false"
-    print output
+    print( output )
 def display_operations( operation, base, relative ):
     arithmetic = operation.arithmetic
     relation = operation.relation
@@ -39,9 +39,9 @@ def display_operations( operation, base, relative ):
     display_relation( base, "!=", relative, relation.not_equal( base, relative ) )
 x = Fractional( 1, 6 )
 y = Fractional( 1, 12 )
-print "Fast Fractional Operations" 
+print( "Fast Fractional Operations" )
 display_operations( fast_operation, x, y )
-print
-print "Reducing Fractional Operations"
+print( "" )
+print( "Reducing Fractional Operations" )
 display_operations( reducing_operation, x, y )
 

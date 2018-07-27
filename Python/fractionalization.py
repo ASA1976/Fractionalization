@@ -1,5 +1,5 @@
-# coding: cp1252
-# © 2018 Aaron Sami Abassi
+# coding: utf-8
+# Â© 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
 FractionalType = type( 'Fractional', (), {} ) 
 ArithmeticalType = type( 'Arithmetical', (), {} ) 
