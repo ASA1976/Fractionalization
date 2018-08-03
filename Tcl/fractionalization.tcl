@@ -82,8 +82,16 @@ namespace eval ::fractionalization {
     proc ReducingMultiply {BaseFraction RelativeFraction} {
         array set Base $BaseFraction
         array set Relative $RelativeFraction
-        set LNRDDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Denominator)]
-        set LDRNDivisor [GreatestCommonDivisor $Relative(Numerator) $Base(Denominator)]
+        if {$Base(Numerator) > 0} {
+            set LNRDDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Denominator)]
+        } else {
+            set LNRDDivisor 1
+        }
+        if {$Relative(Numerator) > 0} {
+            set LDRNDivisor [GreatestCommonDivisor $Relative(Numerator) $Base(Denominator)]
+        } else {
+            set LDRNDivisor 1
+        }
         set Result(Numerator) [expr ($Base(Numerator) / $LNRDDivisor) * ($Relative(Numerator) / $LDRNDivisor)]
         set Result(Denominator) [expr ($Base(Denominator) / $LDRNDivisor) * ($Relative(Denominator) / $LNRDDivisor)]
         return [array get Result]

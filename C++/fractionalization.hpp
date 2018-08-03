@@ -260,14 +260,21 @@ namespace fractionalization {
         const Fractional< Natural >&
             relative
     ) {
-        const Natural
-            lnrd_divisor = GreatestCommonDivisor(base.numerator, relative.denominator),
-            ldrn_divisor = GreatestCommonDivisor(base.denominator, relative.numerator);
-        const Fractional< Natural >
-            result = {
-                (base.numerator / lnrd_divisor) * (relative.numerator / ldrn_divisor),
-                (base.denominator / ldrn_divisor) * (relative.denominator / lnrd_divisor)
-            };
+        Natural
+            lnrd_divisor,
+            ldrn_divisor;
+        Fractional< Natural >
+            result;
+        if (base.numerator > 0)
+            lnrd_divisor = GreatestCommonDivisor( base.numerator, relative.denominator );
+        else
+            lnrd_divisor = 1;
+        if (relative.numerator > 0)
+            ldrn_divisor = GreatestCommonDivisor( base.denominator, relative.numerator );
+        else
+            ldrn_divisor = 1;
+        result.numerator = (base.numerator / lnrd_divisor) * (relative.numerator / ldrn_divisor);
+        result.denominator = (base.denominator / ldrn_divisor) * (relative.denominator / lnrd_divisor);
         return result;
     }
 

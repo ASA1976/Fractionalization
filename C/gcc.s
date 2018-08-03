@@ -73,33 +73,31 @@ main:
 	call	__isoc99_scanf
 	addl	$32, %esp
 	cmpl	$4, %eax
-	jle	.L55
-	movl	-36(%ebp), %ecx
-	testl	%ecx, %ecx
+	jle	.L59
+	movl	-36(%ebp), %edi
+	testl	%edi, %edi
 	je	.L4
-	movl	-28(%ebp), %eax
-	movl	%eax, -60(%ebp)
-	testl	%eax, %eax
+	movl	-28(%ebp), %esi
+	testl	%esi, %esi
 	je	.L4
 	movb	-41(%ebp), %al
 	cmpb	$43, %al
-	je	.L7
-	cmpb	$43, %al
-	jle	.L56
+	je	.L6
+	jle	.L60
 	cmpb	$45, %al
 	je	.L10
 	cmpb	$47, %al
-	jne	.L6
+	jne	.L9
 	movl	-32(%ebp), %eax
 	movl	%eax, -64(%ebp)
-	movl	-40(%ebp), %esi
-	movl	%esi, %ebx
-	cmpl	%esi, %eax
-	jnb	.L32
-	movl	-64(%ebp), %ebx
-	movl	%esi, %eax
-	jmp	.L32
-.L55:
+	movl	-40(%ebp), %ebx
+	movl	%ebx, %ecx
+	cmpl	%ebx, %eax
+	jnb	.L34
+	movl	-64(%ebp), %ecx
+	movl	%ebx, %eax
+	jmp	.L34
+.L59:
 	pushl	stderr
 	pushl	$27
 	pushl	$1
@@ -117,217 +115,49 @@ main:
 	addl	$16, %esp
 	movl	$-2, %eax
 	jmp	.L1
-.L56:
+.L60:
 	cmpb	$42, %al
-	jne	.L6
-	movl	-40(%ebp), %esi
-	movl	-60(%ebp), %eax
-	movl	%esi, %ebx
-	cmpl	%esi, %eax
-	jnb	.L28
-	movl	-60(%ebp), %ebx
-	movl	%esi, %eax
-	jmp	.L28
-.L7:
-	movl	-60(%ebp), %eax
-	movl	%ecx, %ebx
-	cmpl	%eax, %ecx
-	jbe	.L13
-	movl	-60(%ebp), %ebx
-	movl	%ecx, %eax
-	jmp	.L13
-.L37:
-	movl	%edx, %ebx
-.L13:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%edx, %esi
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L37
-	movl	-60(%ebp), %edi
-	cmpl	%edi, %ecx
-	ja	.L57
-	movl	-60(%ebp), %eax
-	movl	$0, %edx
-	divl	%ebx
-	imull	%ecx, %eax
-	movl	%eax, %edi
-.L15:
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	%ecx
-	imull	-40(%ebp), %eax
-	movl	%eax, %ecx
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	-60(%ebp)
-	imull	-32(%ebp), %eax
-	movl	$1, %ebx
-	addl	%eax, %ecx
-	je	.L19
-	cmpl	%edi, %ecx
-	ja	.L39
-	movl	%ecx, %ebx
-	movl	%edi, %eax
-	jmp	.L18
-.L57:
-	movl	%ecx, %eax
-	movl	$0, %edx
-	divl	%ebx
-	imull	%edi, %eax
-	movl	%eax, %edi
-	jmp	.L15
-.L39:
-	movl	%edi, %ebx
-	movl	%ecx, %eax
-	jmp	.L18
-.L40:
-	movl	%edx, %ebx
-.L18:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L40
-	movl	%ecx, %eax
-	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %esi
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %ebx
-	jmp	.L19
-.L10:
-	movl	-60(%ebp), %eax
-	movl	%ecx, %ebx
-	cmpl	%eax, %ecx
-	jbe	.L21
-	movl	-60(%ebp), %ebx
-	movl	%ecx, %eax
-	jmp	.L21
-.L42:
-	movl	%edx, %ebx
-.L21:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%edx, %esi
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L42
-	movl	-60(%ebp), %edi
-	cmpl	%edi, %ecx
-	ja	.L58
-	movl	-60(%ebp), %eax
-	movl	$0, %edx
-	divl	%ebx
-	imull	%ecx, %eax
-	movl	%eax, %edi
-.L23:
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	%ecx
-	imull	-40(%ebp), %eax
-	movl	%eax, %ecx
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	-60(%ebp)
-	imull	-32(%ebp), %eax
-	movl	$1, %ebx
-	subl	%eax, %ecx
-	je	.L19
-	cmpl	%edi, %ecx
-	ja	.L44
-	movl	%ecx, %ebx
-	movl	%edi, %eax
-	jmp	.L26
-.L58:
-	movl	%ecx, %eax
-	movl	$0, %edx
-	divl	%ebx
-	imull	%edi, %eax
-	movl	%eax, %edi
-	jmp	.L23
-.L44:
-	movl	%edi, %ebx
-	movl	%ecx, %eax
-	jmp	.L26
-.L45:
-	movl	%edx, %ebx
-.L26:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L45
-	movl	%ecx, %eax
-	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %esi
-	movl	%edi, %eax
-	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %ebx
-	jmp	.L19
-.L47:
-	movl	%edx, %ebx
-.L28:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L47
+	jne	.L9
+	movl	-40(%ebp), %ebx
+	movl	$1, -60(%ebp)
+	testl	%ebx, %ebx
+	jne	.L61
+.L27:
 	movl	-32(%ebp), %eax
 	movl	%eax, -64(%ebp)
-	movl	%ecx, %edi
-	cmpl	%eax, %ecx
-	jbe	.L30
-	movl	-64(%ebp), %edi
-	movl	%ecx, %eax
-	jmp	.L30
-.L49:
-	movl	%edx, %edi
+	movl	$1, %ecx
+	testl	%eax, %eax
+	jne	.L62
 .L30:
+	movl	%ebx, %eax
 	movl	$0, %edx
-	divl	%edi
-	movl	%edi, %eax
-	testl	%edx, %edx
-	jne	.L49
-	movl	%esi, %eax
-	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %esi
+	divl	-60(%ebp)
+	movl	%eax, %ebx
 	movl	-64(%ebp), %eax
 	movl	$0, %edx
-	divl	%edi
-	imull	%eax, %esi
-	movl	%ecx, %eax
+	divl	%ecx
+	imull	%eax, %ebx
+	movl	%edi, %eax
 	movl	$0, %edx
-	divl	%edi
-	movl	%eax, %ecx
-	movl	-60(%ebp), %eax
+	divl	%ecx
+	movl	%eax, %edi
+	movl	%esi, %eax
 	movl	$0, %edx
-	divl	%ebx
-	imull	%eax, %ecx
-	movl	%ecx, %ebx
+	divl	-60(%ebp)
+	movl	%eax, %esi
+	imull	%edi, %esi
 .L19:
 	subl	$12, %esp
 	pushl	$.LC8
 	call	printf
 	addl	$8, %esp
-	pushl	%esi
+	pushl	%ebx
 	pushl	$.LC9
 	call	printf
 	addl	$16, %esp
-	cmpl	$1, %ebx
-	je	.L35
-	subl	$8, %esp
-	pushl	%ebx
-	pushl	$.LC10
-	call	printf
-	addl	$16, %esp
-.L35:
+	cmpl	$1, %esi
+	jne	.L63
+.L37:
 	subl	$12, %esp
 	pushl	$.LC0
 	call	puts
@@ -350,49 +180,231 @@ main:
 	leal	-4(%ecx), %esp
 	.cfi_def_cfa 4, 4
 	ret
-.L51:
+.L6:
 	.cfi_restore_state
-	movl	%edx, %ebx
-.L32:
-	movl	$0, %edx
-	divl	%ebx
-	movl	%ebx, %eax
-	testl	%edx, %edx
-	jne	.L51
-	movl	-60(%ebp), %eax
-	movl	%ecx, %edi
-	cmpl	%eax, %ecx
-	jbe	.L34
-	movl	-60(%ebp), %edi
-	movl	%ecx, %eax
-	jmp	.L34
-.L53:
-	movl	%edx, %edi
-.L34:
-	movl	$0, %edx
-	divl	%edi
+	cmpl	%esi, %edi
+	ja	.L38
+	movl	%edi, %ecx
+	movl	%esi, %eax
+	jmp	.L13
+.L38:
+	movl	%esi, %ecx
 	movl	%edi, %eax
+	jmp	.L13
+.L39:
+	movl	%edx, %ecx
+.L13:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%edx, %ebx
+	movl	%ecx, %eax
 	testl	%edx, %edx
-	jne	.L53
+	jne	.L39
+	cmpl	%esi, %edi
+	ja	.L64
 	movl	%esi, %eax
 	movl	$0, %edx
-	divl	%ebx
-	movl	%eax, %esi
-	movl	-60(%ebp), %eax
-	movl	$0, %edx
-	divl	%edi
-	imull	%eax, %esi
+	divl	%ecx
+	imull	%edi, %eax
+	movl	%eax, %ecx
+.L15:
 	movl	%ecx, %eax
 	movl	$0, %edx
 	divl	%edi
+	imull	-40(%ebp), %eax
+	movl	%eax, %edi
+	movl	%ecx, %eax
+	movl	$0, %edx
+	divl	%esi
+	imull	-32(%ebp), %eax
+	movl	$1, %esi
+	addl	%eax, %edi
+	je	.L19
+	cmpl	%ecx, %edi
+	ja	.L41
+	movl	%edi, %esi
+	movl	%ecx, %eax
+	jmp	.L18
+.L64:
+	movl	%edi, %eax
+	movl	$0, %edx
+	divl	%ecx
+	imull	%esi, %eax
 	movl	%eax, %ecx
+	jmp	.L15
+.L41:
+	movl	%ecx, %esi
+	movl	%edi, %eax
+	jmp	.L18
+.L42:
+	movl	%edx, %esi
+.L18:
+	movl	$0, %edx
+	divl	%esi
+	movl	%esi, %eax
+	testl	%edx, %edx
+	jne	.L42
+	movl	%edi, %eax
+	movl	$0, %edx
+	divl	%esi
+	movl	%eax, %ebx
+	movl	%ecx, %eax
+	movl	$0, %edx
+	divl	%esi
+	movl	%eax, %esi
+	jmp	.L19
+.L10:
+	cmpl	%esi, %edi
+	ja	.L43
+	movl	%edi, %ecx
+	movl	%esi, %eax
+	jmp	.L21
+.L43:
+	movl	%esi, %ecx
+	movl	%edi, %eax
+	jmp	.L21
+.L44:
+	movl	%edx, %ecx
+.L21:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%edx, %ebx
+	movl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L44
+	cmpl	%esi, %edi
+	ja	.L65
+	movl	%esi, %eax
+	movl	$0, %edx
+	divl	%ecx
+	imull	%edi, %eax
+	movl	%eax, %ecx
+.L23:
+	movl	%ecx, %eax
+	movl	$0, %edx
+	divl	%edi
+	imull	-40(%ebp), %eax
+	movl	%eax, %edi
+	movl	%ecx, %eax
+	movl	$0, %edx
+	divl	%esi
+	imull	-32(%ebp), %eax
+	movl	$1, %esi
+	subl	%eax, %edi
+	je	.L19
+	cmpl	%ecx, %edi
+	ja	.L46
+	movl	%edi, %esi
+	movl	%ecx, %eax
+	jmp	.L26
+.L65:
+	movl	%edi, %eax
+	movl	$0, %edx
+	divl	%ecx
+	imull	%esi, %eax
+	movl	%eax, %ecx
+	jmp	.L23
+.L46:
+	movl	%ecx, %esi
+	movl	%edi, %eax
+	jmp	.L26
+.L47:
+	movl	%edx, %esi
+.L26:
+	movl	$0, %edx
+	divl	%esi
+	movl	%esi, %eax
+	testl	%edx, %edx
+	jne	.L47
+	movl	%edi, %eax
+	movl	$0, %edx
+	divl	%esi
+	movl	%eax, %ebx
+	movl	%ecx, %eax
+	movl	$0, %edx
+	divl	%esi
+	movl	%eax, %esi
+	jmp	.L19
+.L61:
+	cmpl	%ebx, %esi
+	jb	.L49
+	movl	%ebx, %ecx
+	movl	%esi, %eax
+	jmp	.L29
+.L49:
+	movl	%esi, %ecx
+	movl	%ebx, %eax
+	jmp	.L29
+.L50:
+	movl	%edx, %ecx
+.L29:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L50
+	movl	%ecx, -60(%ebp)
+	jmp	.L27
+.L62:
+	movl	%edi, %ecx
+	cmpl	%eax, %edi
+	jbe	.L32
+	movl	-64(%ebp), %ecx
+	movl	%edi, %eax
+	jmp	.L32
+.L53:
+	movl	%edx, %ecx
+.L32:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L53
+	jmp	.L30
+.L55:
+	movl	%edx, %ecx
+.L34:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L55
+	movl	%ecx, -60(%ebp)
+	cmpl	%esi, %edi
+	ja	.L56
+	movl	%edi, %ecx
+	movl	%esi, %eax
+	jmp	.L36
+.L56:
+	movl	%esi, %ecx
+	movl	%edi, %eax
+	jmp	.L36
+.L57:
+	movl	%edx, %ecx
+.L36:
+	movl	$0, %edx
+	divl	%ecx
+	movl	%ecx, %eax
+	testl	%edx, %edx
+	jne	.L57
+	movl	%ebx, %eax
+	movl	$0, %edx
+	divl	-60(%ebp)
+	movl	%eax, %ebx
+	movl	%esi, %eax
+	movl	$0, %edx
+	divl	%ecx
+	imull	%eax, %ebx
+	movl	%edi, %eax
+	movl	$0, %edx
+	divl	%ecx
+	movl	%eax, %esi
 	movl	-64(%ebp), %eax
 	movl	$0, %edx
-	divl	%ebx
-	imull	%eax, %ecx
-	movl	%ecx, %ebx
+	divl	-60(%ebp)
+	imull	%eax, %esi
 	jmp	.L19
-.L6:
+.L9:
 	subl	$4, %esp
 	movsbl	%al, %eax
 	pushl	%eax
@@ -402,8 +414,15 @@ main:
 	addl	$16, %esp
 	movl	$-3, %eax
 	jmp	.L1
+.L63:
+	subl	$8, %esp
+	pushl	%esi
+	pushl	$.LC10
+	call	printf
+	addl	$16, %esp
+	jmp	.L37
 	.cfi_endproc
 .LFE36:
 	.size	main, .-main
-	.ident	"GCC: (GNU) 7.3.0"
+	.ident	"GCC: (GNU) 8.1.1 20180626"
 	.section	.note.GNU-stack,"",@progbits

@@ -10,7 +10,7 @@ Module Fractionalization
 
         Dim Numerator, Denominator As UInteger
 
-        Sub New(ByRef Numerator As UInteger, ByRef Denominator As UInteger)
+        Sub New(ByRef Numerator As UInteger, Optional ByRef Denominator As UInteger = 1)
             Me.Numerator = Numerator
             Me.Denominator = Denominator
         End Sub
@@ -145,8 +145,16 @@ Module Fractionalization
     Public Function ReducingMultiply(ByRef Base As Fractional, ByRef Relative As Fractional) As Fractional
         Dim LNRDDivisor, LDRNDivisor As UInteger
         Dim Result As Fractional
-        LNRDDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Denominator)
-        LDRNDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Numerator)
+        If Base.Numerator > 0 Then
+            LNRDDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Denominator)
+        Else
+            LNRDDivisor = 1
+        End If
+        If Relative.Numerator > 0 Then
+            LDRNDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Numerator)
+        Else
+            LDRNDivisor = 1
+        End If
         Result.Numerator = (Base.Numerator / LNRDDivisor) * (Relative.Numerator / LDRNDivisor)
         Result.Denominator = (Base.Denominator / LDRNDivisor) * (Relative.Denominator / LNRDDivisor)
         Return Result

@@ -23,7 +23,7 @@ template <
     const NaturalArithmetical&
         Arithmetic
 >
-static inline int
+int
 FractionCalculator( void ) {
     NaturalFractional
         x, y, result;
