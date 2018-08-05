@@ -91,23 +91,23 @@ def reducing_subtract( base, relative ):
     return reduce( result )
 def reducing_multiply( base, relative ):
     if base.numerator > 0:
-        lnrd_divisor = greatest_common_divisor( base.numerator, relative.denominator )
+        bnrd_divisor = greatest_common_divisor( base.numerator, relative.denominator )
     else:
-        lnrd_divisor = 1
+        bnrd_divisor = 1
     if relative.numerator > 0:
-        ldrn_divisor = greatest_common_divisor( base.denominator, relative.numerator )
+        bdrn_divisor = greatest_common_divisor( base.denominator, relative.numerator )
     else:
-        ldrn_divisor = 1
+        bdrn_divisor = 1
     result = Fractional()
-    result.numerator = int(base.numerator / lnrd_divisor) * int(relative.numerator / ldrn_divisor )
-    result.denominator = int(base.denominator / ldrn_divisor) * int(relative.denominator / lnrd_divisor )
+    result.numerator = int(base.numerator / bnrd_divisor) * int(relative.numerator / bdrn_divisor )
+    result.denominator = int(base.denominator / bdrn_divisor) * int(relative.denominator / bnrd_divisor )
     return result
 def reducing_divide( base, relative ):
-    lnrn_divisor = greatest_common_divisor( base.numerator, relative.numerator )
-    ldrd_divisor = greatest_common_divisor( base.denominator, relative.denominator )
+    bnrn_divisor = greatest_common_divisor( base.numerator, relative.numerator )
+    bdrd_divisor = greatest_common_divisor( base.denominator, relative.denominator )
     result = Fractional()
-    result.numerator = int(base.numerator / lnrn_divisor) * int(relative.denominator / ldrd_divisor )
-    result.denominator = int(base.denominator / ldrd_divisor) * int(relative.numerator / lnrn_divisor )
+    result.numerator = int(base.numerator / bnrn_divisor) * int(relative.denominator / bdrd_divisor )
+    result.denominator = int(base.denominator / bdrd_divisor) * int(relative.numerator / bnrn_divisor )
     return result
 def fast_lesser( base, relative ):
     return base.numerator * relative.denominator < relative.numerator * base.denominator

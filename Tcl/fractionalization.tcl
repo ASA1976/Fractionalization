@@ -83,26 +83,26 @@ namespace eval ::fractionalization {
         array set Base $BaseFraction
         array set Relative $RelativeFraction
         if {$Base(Numerator) > 0} {
-            set LNRDDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Denominator)]
+            set BNRDDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Denominator)]
         } else {
-            set LNRDDivisor 1
+            set BNRDDivisor 1
         }
         if {$Relative(Numerator) > 0} {
-            set LDRNDivisor [GreatestCommonDivisor $Relative(Numerator) $Base(Denominator)]
+            set BDRNDivisor [GreatestCommonDivisor $Relative(Numerator) $Base(Denominator)]
         } else {
-            set LDRNDivisor 1
+            set BDRNDivisor 1
         }
-        set Result(Numerator) [expr ($Base(Numerator) / $LNRDDivisor) * ($Relative(Numerator) / $LDRNDivisor)]
-        set Result(Denominator) [expr ($Base(Denominator) / $LDRNDivisor) * ($Relative(Denominator) / $LNRDDivisor)]
+        set Result(Numerator) [expr ($Base(Numerator) / $BNRDDivisor) * ($Relative(Numerator) / $BDRNDivisor)]
+        set Result(Denominator) [expr ($Base(Denominator) / $BDRNDivisor) * ($Relative(Denominator) / $BNRDDivisor)]
         return [array get Result]
     }
     proc ReducingDivide {BaseFraction RelativeFraction} {
         array set Base $BaseFraction
         array set Relative $RelativeFraction
-        set LNRNDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Numerator)]
-        set LDRDDivisor [GreatestCommonDivisor $Base(Denominator) $Relative(Denominator)]
-        set Result(Numerator) [expr ($Base(Numerator) / $LNRNDivisor) * ($Relative(Denominator) / $LDRDDivisor)]
-        set Result(Denominator) [expr ($Base(Denominator) / $LDRDDivisor) * ($Relative(Numerator) / $LNRNDivisor)]
+        set BNRNDivisor [GreatestCommonDivisor $Base(Numerator) $Relative(Numerator)]
+        set BDRDDivisor [GreatestCommonDivisor $Base(Denominator) $Relative(Denominator)]
+        set Result(Numerator) [expr ($Base(Numerator) / $BNRNDivisor) * ($Relative(Denominator) / $BDRDDivisor)]
+        set Result(Denominator) [expr ($Base(Denominator) / $BDRDDivisor) * ($Relative(Numerator) / $BNRNDivisor)]
         return [array get Result]
     }
     proc FastLesser {BaseFraction RelativeFraction} {

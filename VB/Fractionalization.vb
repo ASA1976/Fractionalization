@@ -143,30 +143,30 @@ Module Fractionalization
     End Function
 
     Public Function ReducingMultiply(ByRef Base As Fractional, ByRef Relative As Fractional) As Fractional
-        Dim LNRDDivisor, LDRNDivisor As UInteger
+        Dim BNRDDivisor, BDRNDivisor As UInteger
         Dim Result As Fractional
         If Base.Numerator > 0 Then
-            LNRDDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Denominator)
+            BNRDDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Denominator)
         Else
-            LNRDDivisor = 1
+            BNRDDivisor = 1
         End If
         If Relative.Numerator > 0 Then
-            LDRNDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Numerator)
+            BDRNDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Numerator)
         Else
-            LDRNDivisor = 1
+            BDRNDivisor = 1
         End If
-        Result.Numerator = (Base.Numerator / LNRDDivisor) * (Relative.Numerator / LDRNDivisor)
-        Result.Denominator = (Base.Denominator / LDRNDivisor) * (Relative.Denominator / LNRDDivisor)
+        Result.Numerator = (Base.Numerator / BNRDDivisor) * (Relative.Numerator / BDRNDivisor)
+        Result.Denominator = (Base.Denominator / BDRNDivisor) * (Relative.Denominator / BNRDDivisor)
         Return Result
     End Function
 
     Public Function ReducingDivide(ByRef Base As Fractional, ByRef Relative As Fractional) As Fractional
-        Dim LNRNDivisor, LDRDDivisor As UInteger
+        Dim BNRNDivisor, BDRDDivisor As UInteger
         Dim Result As Fractional
-        LNRNDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Numerator)
-        LDRDDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Denominator)
-        Result.Numerator = (Base.Numerator / LNRNDivisor) * (Relative.Denominator / LDRDDivisor)
-        Result.Denominator = (Base.Denominator / LDRDDivisor) * (Relative.Numerator / LNRNDivisor)
+        BNRNDivisor = GreatestCommonDivisor(Base.Numerator, Relative.Numerator)
+        BDRDDivisor = GreatestCommonDivisor(Base.Denominator, Relative.Denominator)
+        Result.Numerator = (Base.Numerator / BNRNDivisor) * (Relative.Denominator / BDRDDivisor)
+        Result.Denominator = (Base.Denominator / BDRDDivisor) * (Relative.Numerator / BNRNDivisor)
         Return Result
     End Function
 
@@ -235,57 +235,5 @@ Module Fractionalization
     Public ReadOnly FastOperation As New Operational(FastArithmetic, FastRelation)
 
     Public ReadOnly ReducingOperation As New Operational(ReducingArithmetic, ReducingRelation)
-
-End Module
-
-Module Example
-
-    Sub DisplayFraction(ByRef Fraction As Fractional)
-        Console.Write(Fraction.Numerator)
-        If (Fraction.Denominator <> 1) Then
-            Console.Write("/" & Fraction.Denominator)
-        End If
-    End Sub
-
-    Sub DisplayArithmetic(ByRef Base As Fractional, Symbol As String, ByRef Relative As Fractional, ByRef Equals As Fractional)
-        DisplayFraction(Base)
-        Console.Write(" " & Symbol & " ")
-        DisplayFraction(Relative)
-        Console.Write(" = ")
-        DisplayFraction(Equals)
-        Console.WriteLine()
-    End Sub
-
-    Sub DisplayRelation(ByRef Base As Fractional, Symbol As String, ByRef Relative As Fractional, ByRef Result As Boolean)
-        DisplayFraction(Base)
-        Console.Write(" " & Symbol & " ")
-        DisplayFraction(Relative)
-        Console.WriteLine(" = " & Result)
-    End Sub
-
-    Sub DisplayOperations(ByRef Operation As Operational, ByVal Base As Fractional, ByVal Relative As Fractional)
-        Dim Arithmetic As Arithmetical = Operation.Arithmetic
-        Dim Relation As Relational = Operation.Relation
-        DisplayArithmetic(Base, "+", Relative, Arithmetic.Add(Base, Relative))
-        DisplayArithmetic(Base, "-", Relative, Arithmetic.Subtract(Base, Relative))
-        DisplayArithmetic(Base, "*", Relative, Arithmetic.Multiply(Base, Relative))
-        DisplayArithmetic(Base, "/", Relative, Arithmetic.Divide(Base, Relative))
-        DisplayRelation(Base, "<", Relative, Relation.Lesser(Base, Relative))
-        DisplayRelation(Base, ">", Relative, Relation.Greater(Base, Relative))
-        DisplayRelation(Base, "=", Relative, Relation.Equal(Base, Relative))
-        DisplayRelation(Base, "<=", Relative, Relation.NotGreater(Base, Relative))
-        DisplayRelation(Base, ">=", Relative, Relation.NotLesser(Base, Relative))
-        DisplayRelation(Base, "<>", Relative, Relation.NotEqual(Base, Relative))
-    End Sub
-
-    Sub Main()
-        Static X As New Fractional(1, 6)
-        Static Y As New Fractional(1, 12)
-        Console.WriteLine("Fast Fractional Operations")
-        DisplayOperations(FastOperation, X, Y)
-        Console.WriteLine()
-        Console.WriteLine("Reducing Fractional Operations")
-        DisplayOperations(ReducingOperation, X, Y)
-    End Sub
 
 End Module

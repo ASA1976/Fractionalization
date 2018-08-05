@@ -261,20 +261,20 @@ namespace fractionalization {
             relative
     ) {
         Natural
-            lnrd_divisor,
-            ldrn_divisor;
+            bnrd_divisor,
+            bdrn_divisor;
         Fractional< Natural >
             result;
         if (base.numerator > 0)
-            lnrd_divisor = GreatestCommonDivisor( base.numerator, relative.denominator );
+            bnrd_divisor = GreatestCommonDivisor( base.numerator, relative.denominator );
         else
-            lnrd_divisor = 1;
+            bnrd_divisor = 1;
         if (relative.numerator > 0)
-            ldrn_divisor = GreatestCommonDivisor( base.denominator, relative.numerator );
+            bdrn_divisor = GreatestCommonDivisor( base.denominator, relative.numerator );
         else
-            ldrn_divisor = 1;
-        result.numerator = (base.numerator / lnrd_divisor) * (relative.numerator / ldrn_divisor);
-        result.denominator = (base.denominator / ldrn_divisor) * (relative.denominator / lnrd_divisor);
+            bdrn_divisor = 1;
+        result.numerator = (base.numerator / bnrd_divisor) * (relative.numerator / bdrn_divisor);
+        result.denominator = (base.denominator / bdrn_divisor) * (relative.denominator / bnrd_divisor);
         return result;
     }
 
@@ -289,12 +289,12 @@ namespace fractionalization {
             relative
     ) {
         const Natural
-            lnrn_divisor = GreatestCommonDivisor(base.numerator, relative.numerator),
-            ldrd_divisor = GreatestCommonDivisor(base.denominator, relative.denominator);
+            bnrn_divisor = GreatestCommonDivisor(base.numerator, relative.numerator),
+            bdrd_divisor = GreatestCommonDivisor(base.denominator, relative.denominator);
         const Fractional< Natural >
             result = {
-                (base.numerator / lnrn_divisor) * (relative.denominator / ldrd_divisor),
-                (base.denominator / ldrd_divisor) * (relative.numerator / lnrn_divisor)
+                (base.numerator / bnrn_divisor) * (relative.denominator / bdrd_divisor),
+                (base.denominator / bdrd_divisor) * (relative.numerator / bnrn_divisor)
             };
         return result;
     }

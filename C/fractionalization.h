@@ -143,29 +143,29 @@ static fractional reducing_subtract(const fractional* const base, const fraction
 
 static fractional reducing_multiply(const fractional* const base, const fractional* const relative)
 {
-    natural lnrd_divisor, ldrn_divisor;
+    natural bnrd_divisor, bdrn_divisor;
     fractional result;
     if (base->numerator > 0)
-        lnrd_divisor = greatest_common_divisor(base->numerator, relative->denominator);
+        bnrd_divisor = greatest_common_divisor(base->numerator, relative->denominator);
     else
-        lnrd_divisor = 1;
+        bnrd_divisor = 1;
     if (relative->numerator > 0)
-        ldrn_divisor = greatest_common_divisor(base->denominator, relative->numerator);
+        bdrn_divisor = greatest_common_divisor(base->denominator, relative->numerator);
     else
-        ldrn_divisor = 1;
-    result.numerator = (base->numerator / lnrd_divisor) * (relative->numerator / ldrn_divisor);
-    result.denominator = (base->denominator / ldrn_divisor) * (relative->denominator / lnrd_divisor);
+        bdrn_divisor = 1;
+    result.numerator = (base->numerator / bnrd_divisor) * (relative->numerator / bdrn_divisor);
+    result.denominator = (base->denominator / bdrn_divisor) * (relative->denominator / bnrd_divisor);
     return result;
 }
 
 static fractional reducing_divide(const fractional* const base, const fractional* const relative)
 {
-    natural lnrn_divisor, ldrd_divisor;
+    natural bnrn_divisor, bdrd_divisor;
     fractional result;
-    lnrn_divisor = greatest_common_divisor(base->numerator, relative->numerator);
-    ldrd_divisor = greatest_common_divisor(base->denominator, relative->denominator);
-    result.numerator = (base->numerator / lnrn_divisor) * (relative->denominator / ldrd_divisor);
-    result.denominator = (base->denominator / ldrd_divisor) * (relative->numerator / lnrn_divisor);
+    bnrn_divisor = greatest_common_divisor(base->numerator, relative->numerator);
+    bdrd_divisor = greatest_common_divisor(base->denominator, relative->denominator);
+    result.numerator = (base->numerator / bnrn_divisor) * (relative->denominator / bdrd_divisor);
+    result.denominator = (base->denominator / bdrd_divisor) * (relative->numerator / bnrn_divisor);
     return result;
 }
 
