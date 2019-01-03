@@ -424,5 +424,5 @@ main:
 	.cfi_endproc
 .LFE36:
 	.size	main, .-main
-	.ident	"GCC: (GNU) 8.1.1 20180626"
+	.ident	"GCC: (GNU) 8.2.0"
 	.section	.note.GNU-stack,"",@progbits

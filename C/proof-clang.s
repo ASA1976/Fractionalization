@@ -409,5 +409,6 @@ main:                                   # @main
 	.size	.L.str.10, 4
 
 
-	.ident	"clang version 6.0.1 (tags/RELEASE_601/final)"
+	.ident	"clang version 7.0.1 (tags/RELEASE_701/final)"
 	.section	".note.GNU-stack","",@progbits
+	.addrsig

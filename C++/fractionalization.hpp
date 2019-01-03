@@ -1,4 +1,4 @@
-// © 2018 Aaron Sami Abassi
+// © 2019 Aaron Sami Abassi
 // Licensed under the Academic Free License version 3.0
 #ifndef FRACTIONALIZATION_MODULE
 #define FRACTIONALIZATION_MODULE
@@ -471,67 +471,67 @@ namespace fractionalization {
         typename Natural
     >
     static constexpr Arithmetical< Natural >
-    FastArithmetic = {
-        FastAdd< Natural >,
-        FastSubtract< Natural >,
-        FastMultiply< Natural >,
-        FastDivide< Natural >
-    };
+        FastArithmetic = {
+            FastAdd< Natural >,
+            FastSubtract< Natural >,
+            FastMultiply< Natural >,
+            FastDivide< Natural >
+        };
 
     template <
         typename Natural
     >
     static constexpr Arithmetical< Natural >
-    ReducingArithmetic = {
-        ReducingAdd< Natural >,
-        ReducingSubtract< Natural >,
-        ReducingMultiply< Natural >,
-        ReducingDivide< Natural >
-    };
+        ReducingArithmetic = {
+            ReducingAdd< Natural >,
+            ReducingSubtract< Natural >,
+            ReducingMultiply< Natural >,
+            ReducingDivide< Natural >
+        };
 
     template <
         typename Natural
     >
     static constexpr Relational< Natural >
-    FastRelation = {
-        FastLesser< Natural >,
-        FastGreater< Natural >,
-        FastEqual< Natural >,
-        FastNotGreater< Natural >,
-        FastNotLesser< Natural >,
-        FastNotEqual< Natural >,
-    };
+        FastRelation = {
+            FastLesser< Natural >,
+            FastGreater< Natural >,
+            FastEqual< Natural >,
+            FastNotGreater< Natural >,
+            FastNotLesser< Natural >,
+            FastNotEqual< Natural >,
+        };
 
     template <
         typename Natural
     >
     static constexpr Relational< Natural >
-    ReducingRelation = {
-        ReducingLesser< Natural >,
-        ReducingGreater< Natural >,
-        ReducingEqual< Natural >,
-        ReducingNotGreater< Natural >,
-        ReducingNotLesser< Natural >,
-        ReducingNotEqual< Natural >,
-    };
+        ReducingRelation = {
+            ReducingLesser< Natural >,
+            ReducingGreater< Natural >,
+            ReducingEqual< Natural >,
+            ReducingNotGreater< Natural >,
+            ReducingNotLesser< Natural >,
+            ReducingNotEqual< Natural >,
+        };
 
     template <
         typename Natural
     >
     static constexpr Operational< Natural >
-    FastOperation = {
-        FastArithmetic< Natural >,
-        FastRelation< Natural >
-    };
+        FastOperation = {
+            FastArithmetic< Natural >,
+            FastRelation< Natural >
+        };
 
     template <
         typename Natural
     >
     static constexpr Operational< Natural >
-    ReducingOperation = {
-        ReducingArithmetic< Natural >,
-        ReducingRelation< Natural >
-    };
+        ReducingOperation = {
+            ReducingArithmetic< Natural >,
+            ReducingRelation< Natural >
+        };
 
 }
 #endif

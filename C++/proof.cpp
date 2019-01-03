@@ -1,13 +1,12 @@
-// © 2018 Aaron Sami Abassi
+// © 2019 Aaron Sami Abassi
 // Licensed under the Academic Free License version 3.0
 #include "fractionalization.hpp"
 #include <cstdio>
 
 using namespace ::fractionalization;
 
-using Natural = unsigned int;
-using NaturalFractional = Fractional< Natural >;
-using NaturalArithmetical = Arithmetical< Natural >;
+using NaturalFractional = Fractional< unsigned int >;
+using NaturalArithmetical = Arithmetical< unsigned int >;
 
 static inline void
 DisplayFraction(
@@ -68,6 +67,6 @@ FractionCalculator( void ) {
 int
 main() {
     static auto&
-        ReducingFractionCalculator = FractionCalculator< ReducingArithmetic< Natural > >;
+        ReducingFractionCalculator = FractionCalculator< ReducingArithmetic< unsigned int > >;
     return ReducingFractionCalculator();
 }
