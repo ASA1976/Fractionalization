@@ -5,17 +5,17 @@
 
 using namespace ::fractionalization;
 
-using NaturalFractional = Fractional< unsigned int >;
-using NaturalOperational = Operational< unsigned int >;
+using NaturalFractional = Fractional<unsigned int>;
+using NaturalOperational = Operational<unsigned int>;
 
 static inline void
 DisplayFraction(
     const NaturalFractional&
-        fraction
-) {
-    printf( "%u", fraction.numerator );
+        fraction)
+{
+    printf("%u", fraction.numerator);
     if (fraction.denominator != 1)
-        printf( "/%u", fraction.denominator );
+        printf("/%u", fraction.denominator);
 }
 
 static inline void
@@ -27,14 +27,14 @@ DisplayArithmetic(
     const NaturalFractional&
         right,
     const NaturalFractional&
-        equals
-) {
-    DisplayFraction( left );
-    printf( " %s ", symbol );
-    DisplayFraction( right );
-    printf( " = " );
-    DisplayFraction( equals );
-    puts( "" );
+        equals)
+{
+    DisplayFraction(left);
+    printf(" %s ", symbol);
+    DisplayFraction(right);
+    printf(" = ");
+    DisplayFraction(equals);
+    puts("");
 }
 
 static inline void
@@ -45,13 +45,13 @@ DisplayRelation(
         symbol,
     const NaturalFractional&
         right,
-    const bool result
-) {
-    DisplayFraction( left );
-    printf( " %s ", symbol );
-    DisplayFraction( right );
-    printf( " = %s", result ? "true" : "false" );
-    puts( "" );
+    const bool result)
+{
+    DisplayFraction(left);
+    printf(" %s ", symbol);
+    DisplayFraction(right);
+    printf(" = %s", result ? "true" : "false");
+    puts("");
 }
 
 static inline void
@@ -61,37 +61,42 @@ DisplayOperations(
     const NaturalFractional&
         base,
     const NaturalFractional&
-        relative
-) {
+        relative)
+{
     const auto&
-        arithmetic = operation.arithmetic;
+        arithmetic
+        = operation.arithmetic;
     const auto&
-        relation = operation.relation;
-    DisplayArithmetic( base, "+", relative, arithmetic.add( base, relative ) );
-    DisplayArithmetic( base, "-", relative, arithmetic.subtract( base, relative ) );
-    DisplayArithmetic( base, "*", relative, arithmetic.multiply( base, relative ) );
-    DisplayArithmetic( base, "/", relative, arithmetic.divide( base, relative ) );
-    DisplayRelation( base, "<", relative, relation.lesser( base,  relative ) );
-    DisplayRelation( base, ">", relative, relation.greater( base, relative ) );
-    DisplayRelation( base, "==", relative, relation.equal( base, relative ) );
-    DisplayRelation( base, "<=", relative, relation.not_greater( base, relative ) );
-    DisplayRelation( base, ">=", relative, relation.not_lesser( base, relative ) );
-    DisplayRelation( base, "!=", relative, relation.not_equal( base, relative ) );
+        relation
+        = operation.relation;
+    DisplayArithmetic(base, "+", relative, arithmetic.add(base, relative));
+    DisplayArithmetic(base, "-", relative, arithmetic.subtract(base, relative));
+    DisplayArithmetic(base, "*", relative, arithmetic.multiply(base, relative));
+    DisplayArithmetic(base, "/", relative, arithmetic.divide(base, relative));
+    DisplayRelation(base, "<", relative, relation.lesser(base, relative));
+    DisplayRelation(base, ">", relative, relation.greater(base, relative));
+    DisplayRelation(base, "==", relative, relation.equal(base, relative));
+    DisplayRelation(base, "<=", relative, relation.not_greater(base, relative));
+    DisplayRelation(base, ">=", relative, relation.not_lesser(base, relative));
+    DisplayRelation(base, "!=", relative, relation.not_equal(base, relative));
 }
 
-int
-main() {
+int main()
+{
     static auto&
-        NaturalFastOperation = FastOperation< unsigned int >;
+        NaturalFastOperation
+        = FastOperation<unsigned int>;
     static auto&
-        NaturalReducingOperation = ReducingOperation< unsigned int >;
+        NaturalReducingOperation
+        = ReducingOperation<unsigned int>;
     static const NaturalFractional
-        X = {1, 6},
-        Y = {1, 12};
-    puts( "Fast Fractional Operations" );
-    DisplayOperations( NaturalFastOperation, X, Y );
-    puts( "" );
-    puts( "Reducing Fractional Operations" );
-    DisplayOperations( NaturalReducingOperation, X, Y );
+        X
+        = { 1, 6 },
+        Y = { 1, 12 };
+    puts("Fast Fractional Operations");
+    DisplayOperations(NaturalFastOperation, X, Y);
+    puts("");
+    puts("Reducing Fractional Operations");
+    DisplayOperations(NaturalReducingOperation, X, Y);
     return 0;
 }

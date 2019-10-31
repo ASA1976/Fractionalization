@@ -45,8 +45,8 @@ typedef struct relational_s {
 
 typedef struct operational_s {
 
-    const arithmetical *arithmetic;
-    const relational *relation;
+    const arithmetical* arithmetic;
+    const relational* relation;
 
 } operational;
 
@@ -236,45 +236,33 @@ static boolean reducing_not_equal(const fractional* const base, const fractional
 }
 
 static const arithmetical
-    FAST_ARITHMETIC = {
-        fast_add,
-        fast_subtract,
-        fast_multiply,
-        fast_divide
-    },
-    REDUCING_ARITHMETIC = {
-        reducing_add,
-        reducing_subtract,
-        reducing_multiply,
-        reducing_divide
-    };
+    FAST_ARITHMETIC
+    = {
+          fast_add,
+          fast_subtract,
+          fast_multiply,
+          fast_divide
+      },
+    REDUCING_ARITHMETIC = { reducing_add, reducing_subtract, reducing_multiply, reducing_divide };
 
 static const relational
-    FAST_RELATION = {
-        fast_lesser,
-        fast_greater,
-        fast_equal,
-        fast_not_greater,
-        fast_not_lesser,
-        fast_not_equal
-    },
-    REDUCING_RELATION = {
-        reducing_lesser,
-        reducing_greater,
-        reducing_equal,
-        reducing_not_greater,
-        reducing_not_lesser,
-        reducing_not_equal
-    };
+    FAST_RELATION
+    = {
+          fast_lesser,
+          fast_greater,
+          fast_equal,
+          fast_not_greater,
+          fast_not_lesser,
+          fast_not_equal
+      },
+    REDUCING_RELATION = { reducing_lesser, reducing_greater, reducing_equal, reducing_not_greater, reducing_not_lesser, reducing_not_equal };
 
 static const operational
-    FAST_OPERATION = {
-        &FAST_ARITHMETIC,
-        &FAST_RELATION
-    },
-    REDUCING_OPERATION = {
-        &REDUCING_ARITHMETIC,
-        &REDUCING_RELATION
-    };
+    FAST_OPERATION
+    = {
+          &FAST_ARITHMETIC,
+          &FAST_RELATION
+      },
+    REDUCING_OPERATION = { &REDUCING_ARITHMETIC, &REDUCING_RELATION };
 
 #endif

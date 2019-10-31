@@ -12,7 +12,7 @@ static void display_fraction(const fractional* const fraction)
         printf("/%u", fraction->denominator);
 }
 
-static void display_arithmetic(const fractional* const base, const char *const symbol, const fractional* const relative, const fractional* const equals)
+static void display_arithmetic(const fractional* const base, const char* const symbol, const fractional* const relative, const fractional* const equals)
 {
     display_fraction(base);
     printf(" %s ", symbol);
@@ -22,7 +22,7 @@ static void display_arithmetic(const fractional* const base, const char *const s
     printf("\n");
 }
 
-static void display_relation( const fractional* const base, const char *const symbol, const fractional* const relative, const boolean result )
+static void display_relation(const fractional* const base, const char* const symbol, const fractional* const relative, const boolean result)
 {
     display_fraction(base);
     printf(" %s ", symbol);
@@ -30,10 +30,10 @@ static void display_relation( const fractional* const base, const char *const sy
     printf(" = %s\n", result ? "true" : "false");
 }
 
-static void display_operations(const operational *const operation, const fractional* const base, const fractional* const relative)
+static void display_operations(const operational* const operation, const fractional* const base, const fractional* const relative)
 {
-    const arithmetical *const arithmetic = operation->arithmetic;
-    const relational *const relation = operation->relation;
+    const arithmetical* const arithmetic = operation->arithmetic;
+    const relational* const relation = operation->relation;
     fractional result;
     result = arithmetic->add(base, relative);
     display_arithmetic(base, "+", relative, &result);
@@ -53,7 +53,7 @@ static void display_operations(const operational *const operation, const fractio
 
 int main()
 {
-    static const fractional X = {1, 6}, Y = {1, 12};
+    static const fractional X = { 1, 6 }, Y = { 1, 12 };
     printf("Fast Fractional Operations\n");
     display_operations(&FAST_OPERATION, &X, &Y);
     printf("\n");
