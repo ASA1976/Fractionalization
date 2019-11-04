@@ -5,8 +5,7 @@
 
 namespace fractionalization {
 
-template <
-    typename Natural>
+template <typename Natural>
 struct Fractional {
 
     Natural
@@ -14,20 +13,17 @@ struct Fractional {
         denominator;
 };
 
-template <
-    typename Natural>
+template <typename Natural>
 using ArithmeticalAbstract = Fractional<Natural>(
     const Fractional<Natural>&,
     const Fractional<Natural>&);
 
-template <
-    typename Natural>
+template <typename Natural>
 using RelationalAbstract = bool(
     const Fractional<Natural>&,
     const Fractional<Natural>&);
 
-template <
-    typename Natural>
+template <typename Natural>
 struct Arithmetical {
 
     ArithmeticalAbstract<Natural>
@@ -37,8 +33,7 @@ struct Arithmetical {
         &divide;
 };
 
-template <
-    typename Natural>
+template <typename Natural>
 struct Relational {
 
     RelationalAbstract<Natural>
@@ -50,17 +45,14 @@ struct Relational {
         &not_equal;
 };
 
-template <
-    typename Natural>
+template <typename Natural>
 struct Operational {
 
     const Arithmetical<Natural>& arithmetic;
-
     const Relational<Natural>& relation;
 };
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Natural
 GreatestCommonDivisor(
     const Natural&
@@ -69,10 +61,7 @@ GreatestCommonDivisor(
         b)
 {
     // Euclidean Algorithm
-    Natural
-        dividend,
-        divisor,
-        remainder;
+    Natural dividend, divisor, remainder;
     if (a > b) {
         dividend = a;
         divisor = b;
@@ -87,8 +76,7 @@ GreatestCommonDivisor(
     return divisor;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Natural
 LeastCommonMultiple(
     const Natural&
@@ -96,25 +84,20 @@ LeastCommonMultiple(
     const Natural&
         b)
 {
-    const Natural
-        divisor
-        = GreatestCommonDivisor(a, b);
+    const Natural divisor = GreatestCommonDivisor(a, b);
     if (a > b)
         return a / divisor * b;
     return b / divisor * a;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 Reduce(
     const Fractional<Natural>&
         fraction)
 {
-    Natural
-        divisor;
-    Fractional<Natural>
-        result;
+    Natural divisor;
+    Fractional<Natural> result;
     if (fraction.numerator == 0) {
         result.numerator = 0;
         result.denominator = 1;
@@ -126,8 +109,7 @@ Reduce(
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 FastAdd(
     const Fractional<Natural>&
@@ -135,16 +117,14 @@ FastAdd(
     const Fractional<Natural>&
         relative)
 {
-    const Fractional<Natural>
-        result = {
-            base.numerator * relative.denominator + relative.numerator * base.denominator,
-            base.denominator * relative.denominator
-        };
+    const Fractional<Natural> result = {
+        base.numerator * relative.denominator + relative.numerator * base.denominator,
+        base.denominator * relative.denominator
+    };
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 FastSubtract(
     const Fractional<Natural>&
@@ -152,16 +132,14 @@ FastSubtract(
     const Fractional<Natural>&
         relative)
 {
-    const Fractional<Natural>
-        result = {
-            base.numerator * relative.denominator - relative.numerator * base.denominator,
-            base.denominator * relative.denominator
-        };
+    const Fractional<Natural> result = {
+        base.numerator * relative.denominator - relative.numerator * base.denominator,
+        base.denominator * relative.denominator
+    };
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 FastMultiply(
     const Fractional<Natural>&
@@ -169,16 +147,14 @@ FastMultiply(
     const Fractional<Natural>&
         relative)
 {
-    const Fractional<Natural>
-        result = {
-            base.numerator * relative.numerator,
-            base.denominator * relative.denominator
-        };
+    const Fractional<Natural> result = {
+        base.numerator * relative.numerator,
+        base.denominator * relative.denominator
+    };
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 FastDivide(
     const Fractional<Natural>&
@@ -186,16 +162,14 @@ FastDivide(
     const Fractional<Natural>&
         relative)
 {
-    const Fractional<Natural>
-        result = {
-            base.numerator * relative.denominator,
-            base.denominator * relative.numerator
-        };
+    const Fractional<Natural> result = {
+        base.numerator * relative.denominator,
+        base.denominator * relative.numerator
+    };
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 ReducingAdd(
     const Fractional<Natural>&
@@ -203,16 +177,14 @@ ReducingAdd(
     const Fractional<Natural>&
         relative)
 {
-    Fractional<Natural>
-        result;
+    Fractional<Natural> result;
     result.denominator = LeastCommonMultiple(base.denominator, relative.denominator);
     result.numerator = base.numerator * (result.denominator / base.denominator);
     result.numerator += relative.numerator * (result.denominator / relative.denominator);
     return Reduce(result);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 ReducingSubtract(
     const Fractional<Natural>&
@@ -220,8 +192,7 @@ ReducingSubtract(
     const Fractional<Natural>&
         relative)
 {
-    Fractional<Natural>
-        result;
+    Fractional<Natural> result;
     result.denominator = LeastCommonMultiple(base.denominator, relative.denominator);
     result.numerator = base.numerator * (result.denominator / base.denominator);
     result.numerator -= relative.numerator * (result.denominator / relative.denominator);
@@ -237,11 +208,8 @@ ReducingMultiply(
     const Fractional<Natural>&
         relative)
 {
-    Natural
-        bnrd_divisor,
-        bdrn_divisor;
-    Fractional<Natural>
-        result;
+    Natural bnrd_divisor, bdrn_divisor;
+    Fractional<Natural> result;
     if (base.numerator > 0)
         bnrd_divisor = GreatestCommonDivisor(base.numerator, relative.denominator);
     else
@@ -255,8 +223,7 @@ ReducingMultiply(
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline Fractional<Natural>
 ReducingDivide(
     const Fractional<Natural>&
@@ -268,16 +235,14 @@ ReducingDivide(
         bnrn_divisor
         = GreatestCommonDivisor(base.numerator, relative.numerator),
         bdrd_divisor = GreatestCommonDivisor(base.denominator, relative.denominator);
-    const Fractional<Natural>
-        result = {
-            (base.numerator / bnrn_divisor) * (relative.denominator / bdrd_divisor),
-            (base.denominator / bdrd_divisor) * (relative.numerator / bnrn_divisor)
-        };
+    const Fractional<Natural> result = {
+        (base.numerator / bnrn_divisor) * (relative.denominator / bdrd_divisor),
+        (base.denominator / bdrd_divisor) * (relative.numerator / bnrn_divisor)
+    };
     return result;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastLesser(
     const Fractional<Natural>&
@@ -288,8 +253,7 @@ FastLesser(
     return base.numerator * relative.denominator < relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastGreater(
     const Fractional<Natural>&
@@ -300,8 +264,7 @@ FastGreater(
     return base.numerator * relative.denominator > relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastEqual(
     const Fractional<Natural>&
@@ -312,8 +275,7 @@ FastEqual(
     return base.numerator * relative.denominator == relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastNotGreater(
     const Fractional<Natural>&
@@ -324,8 +286,7 @@ FastNotGreater(
     return base.numerator * relative.denominator <= relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastNotLesser(
     const Fractional<Natural>&
@@ -336,8 +297,7 @@ FastNotLesser(
     return base.numerator * relative.denominator >= relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 FastNotEqual(
     const Fractional<Natural>&
@@ -348,8 +308,7 @@ FastNotEqual(
     return base.numerator * relative.denominator != relative.numerator * base.denominator;
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingLesser(
     const Fractional<Natural>&
@@ -357,14 +316,11 @@ ReducingLesser(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) < relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingGreater(
     const Fractional<Natural>&
@@ -372,14 +328,11 @@ ReducingGreater(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) > relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingEqual(
     const Fractional<Natural>&
@@ -387,14 +340,11 @@ ReducingEqual(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) == relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingNotGreater(
     const Fractional<Natural>&
@@ -402,14 +352,11 @@ ReducingNotGreater(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) <= relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingNotLesser(
     const Fractional<Natural>&
@@ -417,14 +364,11 @@ ReducingNotLesser(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) >= relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static inline bool
 ReducingNotEqual(
     const Fractional<Natural>&
@@ -432,14 +376,11 @@ ReducingNotEqual(
     const Fractional<Natural>&
         relative)
 {
-    const Natural
-        factor
-        = LeastCommonMultiple(base.denominator, relative.denominator);
+    const Natural factor = LeastCommonMultiple(base.denominator, relative.denominator);
     return base.numerator * (factor / base.denominator) != relative.numerator * (factor / relative.denominator);
 }
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Arithmetical<Natural>
     FastArithmetic = {
         FastAdd<Natural>,
@@ -448,8 +389,7 @@ static constexpr Arithmetical<Natural>
         FastDivide<Natural>
     };
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Arithmetical<Natural>
     ReducingArithmetic = {
         ReducingAdd<Natural>,
@@ -458,8 +398,7 @@ static constexpr Arithmetical<Natural>
         ReducingDivide<Natural>
     };
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Relational<Natural>
     FastRelation = {
         FastLesser<Natural>,
@@ -470,8 +409,7 @@ static constexpr Relational<Natural>
         FastNotEqual<Natural>,
     };
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Relational<Natural>
     ReducingRelation = {
         ReducingLesser<Natural>,
@@ -482,16 +420,14 @@ static constexpr Relational<Natural>
         ReducingNotEqual<Natural>,
     };
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Operational<Natural>
     FastOperation = {
         FastArithmetic<Natural>,
         FastRelation<Natural>
     };
 
-template <
-    typename Natural>
+template <typename Natural>
 static constexpr Operational<Natural>
     ReducingOperation = {
         ReducingArithmetic<Natural>,

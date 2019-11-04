@@ -4,7 +4,6 @@
 #include <cstdio>
 
 using namespace ::fractionalization;
-
 using NaturalFractional = Fractional<unsigned int>;
 using NaturalOperational = Operational<unsigned int>;
 
@@ -45,7 +44,8 @@ DisplayRelation(
         symbol,
     const NaturalFractional&
         right,
-    const bool result)
+    const bool&
+        result)
 {
     DisplayFraction(left);
     printf(" %s ", symbol);
@@ -63,12 +63,8 @@ DisplayOperations(
     const NaturalFractional&
         relative)
 {
-    const auto&
-        arithmetic
-        = operation.arithmetic;
-    const auto&
-        relation
-        = operation.relation;
+    const auto& arithmetic = operation.arithmetic;
+    const auto& relation = operation.relation;
     DisplayArithmetic(base, "+", relative, arithmetic.add(base, relative));
     DisplayArithmetic(base, "-", relative, arithmetic.subtract(base, relative));
     DisplayArithmetic(base, "*", relative, arithmetic.multiply(base, relative));
@@ -83,16 +79,9 @@ DisplayOperations(
 
 int main()
 {
-    static auto&
-        NaturalFastOperation
-        = FastOperation<unsigned int>;
-    static auto&
-        NaturalReducingOperation
-        = ReducingOperation<unsigned int>;
-    static const NaturalFractional
-        X
-        = { 1, 6 },
-        Y = { 1, 12 };
+    static auto& NaturalFastOperation = FastOperation<unsigned int>;
+    static auto& NaturalReducingOperation = ReducingOperation<unsigned int>;
+    static const NaturalFractional X = { 1, 6 }, Y = { 1, 12 };
     puts("Fast Fractional Operations");
     DisplayOperations(NaturalFastOperation, X, Y);
     puts("");
