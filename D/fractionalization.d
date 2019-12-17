@@ -22,6 +22,7 @@ struct Operational(Natural)
 }
 Natural GreatestCommonDivisor(Natural)(Natural a, Natural b)
 {
+    // Euclidean Algorithm
     Natural dividend, divisor, remainder;
     if (a > b) {
         dividend = a;
