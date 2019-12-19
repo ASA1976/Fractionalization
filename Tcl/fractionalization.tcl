@@ -1,6 +1,9 @@
 # © 2018 Aaron Sami Abassi
 # Licensed under the Academic Free License version 3.0
 namespace eval ::fractionalization {
+    proc Zero {} {
+        return {Numerator 0 Denominator 1}
+    }
     proc GreatestCommonDivisor {UnsignedIntegerA UnsignedIntegerB} {
         # Euclidean Algorithm
         if {$UnsignedIntegerA >= $UnsignedIntegerB} {
@@ -171,29 +174,47 @@ namespace eval ::fractionalization {
         set Factor [LeastCommonMultiple $Base(Denominator) $Relative(Denominator)]
         return [expr $Base(Numerator) * ($Factor / $Base(Denominator)) != $Relative(Numerator) * ($Factor / $Relative(Denominator))]
     }
-    set FastArithmetic(Add) [namespace origin FastAdd]
-    set FastArithmetic(Subtract) [namespace origin FastSubtract]
-    set FastArithmetic(Multiply) [namespace origin FastMultiply]
-    set FastArithmetic(Divide) [namespace origin FastDivide]
-    set ReducingArithmetic(Add) [namespace origin ReducingAdd]
-    set ReducingArithmetic(Subtract) [namespace origin ReducingSubtract]
-    set ReducingArithmetic(Multiply) [namespace origin ReducingMultiply]
-    set ReducingArithmetic(Divide) [namespace origin ReducingDivide]
-    set FastRelation(Lesser) [namespace origin FastLesser]
-    set FastRelation(Greater) [namespace origin FastGreater]
-    set FastRelation(Equal) [namespace origin FastEqual]
-    set FastRelation(NotGreater) [namespace origin FastNotGreater]
-    set FastRelation(NotLesser) [namespace origin FastNotLesser]
-    set FastRelation(NotEqual) [namespace origin FastNotEqual]
-    set ReducingRelation(Lesser) [namespace origin ReducingLesser]
-    set ReducingRelation(Greater) [namespace origin ReducingGreater]
-    set ReducingRelation(Equal) [namespace origin ReducingEqual]
-    set ReducingRelation(NotGreater) [namespace origin ReducingNotGreater]
-    set ReducingRelation(NotLesser) [namespace origin ReducingNotLesser]
-    set ReducingRelation(NotEqual) [namespace origin ReducingNotEqual]
-    set FastOperation(Arithmetic) [array get FastArithmetic]
-    set FastOperation(Relation) [array get FastRelation]
-    set ReducingOperation(Arithmetic) [array get ReducingArithmetic]
-    set ReducingOperation(Relation) [array get ReducingRelation]
+    proc FastArithmetic {} {
+        set Arithmetic(Add) [namespace origin FastAdd]
+        set Arithmetic(Subtract) [namespace origin FastSubtract]
+        set Arithmetic(Multiply) [namespace origin FastMultiply]
+        set Arithmetic(Divide) [namespace origin FastDivide]
+        return [array get Arithmetic]
+    }
+    proc ReducingArithmetic {} {
+        set Arithmetic(Add) [namespace origin ReducingAdd]
+        set Arithmetic(Subtract) [namespace origin ReducingSubtract]
+        set Arithmetic(Multiply) [namespace origin ReducingMultiply]
+        set Arithmetic(Divide) [namespace origin ReducingDivide]
+        return [array get Arithmetic]
+    }
+    proc FastRelation {} {
+        set Relation(Lesser) [namespace origin FastLesser]
+        set Relation(Greater) [namespace origin FastGreater]
+        set Relation(Equal) [namespace origin FastEqual]
+        set Relation(NotGreater) [namespace origin FastNotGreater]
+        set Relation(NotLesser) [namespace origin FastNotLesser]
+        set Relation(NotEqual) [namespace origin FastNotEqual]
+        return [array get Relation]
+    }
+    proc ReducingRelation {} {
+        set Relation(Lesser) [namespace origin ReducingLesser]
+        set Relation(Greater) [namespace origin ReducingGreater]
+        set Relation(Equal) [namespace origin ReducingEqual]
+        set Relation(NotGreater) [namespace origin ReducingNotGreater]
+        set Relation(NotLesser) [namespace origin ReducingNotLesser]
+        set Relation(NotEqual) [namespace origin ReducingNotEqual]
+        return [array get Relation]
+    }
+    proc FastOperation {} {
+        set Operation(Arithmetic) [array get FastArithmetic]
+        set Operation(Relation) [array get FastRelation]
+        return [array get Operation]
+    }
+    proc ReducingOperation {} {
+        set Operation(Arithmetic) [array get ReducingArithmetic]
+        set Operation(Relation) [array get ReducingRelation]
+        return [array get Operation]
+    }
 }
 

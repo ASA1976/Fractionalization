@@ -34,6 +34,7 @@ sub operational {
     $operation{relation} = $_[1];
     return \%operation;
 }
+our $zero = fractional( 0, 1 );
 sub greatest_common_divisor {
     # Euclidean Algorithm
     my ($a, $b) = @_;

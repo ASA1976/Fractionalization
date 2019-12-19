@@ -16,6 +16,9 @@ type Operational struct {
     Arithmetic Arithmetical
     Relation Relational
 }
+func Zero() Fractional {
+    return Fractional{0, 1}
+}
 func GreatestCommonDivisor(a uint, b uint) uint {
     // Euclidean Algorithm
     var (dividend, divisor, remainder uint)

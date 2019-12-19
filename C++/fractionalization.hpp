@@ -52,6 +52,9 @@ struct Operational {
     const Relational<Natural>& relation;
 };
 
+template <typename Natural, Natural Denominator = 1>
+static constexpr Fractional<Natural> Zero = { 0, Denominator };
+
 template <typename Natural>
 static inline Natural
 GreatestCommonDivisor(

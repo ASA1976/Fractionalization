@@ -31,6 +31,7 @@ def Operational( arithmetic, relation ):
     operation.arithmetic = arithmetic
     operation.relation = relation
     return operation
+zero = Fractional( 0, 1 )
 def greatest_common_divisor( a, b ):
     # Euclidean Algorithm
     if a > b:

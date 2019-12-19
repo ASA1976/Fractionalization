@@ -20,6 +20,10 @@ struct Operational(Natural)
     Arithmetical!Natural arithmetic;
     Relational!Natural relation;
 }
+const Fractional!Natural Zero(Natural) = {
+    numerator: 0,
+    denominator: 1
+};
 Natural GreatestCommonDivisor(Natural)(Natural a, Natural b)
 {
     // Euclidean Algorithm

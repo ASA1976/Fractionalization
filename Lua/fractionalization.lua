@@ -1,5 +1,9 @@
 -- © 2019 Aaron Sami Abassi
 -- Licensed under the Academic Free License version 3.0
+local zero = {
+    numerator = 0,
+    denominator = 1
+}
 local function greatest_common_divisor(a, b)
     -- Euclidean Algorithm
     local dividend, divisor, remainder
@@ -177,6 +181,7 @@ local reducing_operation = {
     relation = reducing_relation
 }
 return {
+    zero,
     greatest_common_divisor = greatest_common_divisor,
     least_common_multiple = least_common_multiple,
     fast_add = fast_add,

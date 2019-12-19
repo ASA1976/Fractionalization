@@ -58,6 +58,8 @@ Module Fractionalization
 
     End Structure
 
+    Public ReadOnly Zero As New Fractional(0, 1)
+
     Public Function GreatestCommonDivisor(A As UInteger, B As UInteger) As UInteger
         ' Eclidean Algorithm
         Dim Dividend, Divisor, Remainder As UInteger

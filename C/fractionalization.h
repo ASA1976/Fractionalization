@@ -48,6 +48,8 @@ typedef struct operational_s {
 
 } operational;
 
+static const fractional ZERO = { 0, 1 };
+
 static natural greatest_common_divisor(const natural a, const natural b)
 {
     /* Euclidean Algorithm */
