@@ -6,6 +6,8 @@ Each of the ten programmatic elements described in the paradigm definition are
 demonstrated, where classification is also a form of situation and 
 objectification is also a form of location.
 
+---
+
 ## Fractionalization
 
 This association contains definitions of a fractional type as well as basic 
@@ -179,6 +181,8 @@ In some languages this is implemented as a function which returns the objective.
 
 This objective contains the locations of the reducing operational functions.
 In some languages this is implemented as a function which returns the objective.
+
+---
 
 ## Example
 
