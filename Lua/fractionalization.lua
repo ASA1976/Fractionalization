@@ -181,7 +181,7 @@ local reducing_operation = {
     relation = reducing_relation
 }
 return {
-    zero,
+    zero = zero,
     greatest_common_divisor = greatest_common_divisor,
     least_common_multiple = least_common_multiple,
     fast_add = fast_add,
