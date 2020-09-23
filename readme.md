@@ -46,7 +46,7 @@ This classifer represents a fractional operation function table type.
 
 ### Zero
 
-This informity must at least represent the normalized zero fraction (0/1).
+This info must at least represent the normalized zero fraction (0/1).
 
 ### GreatestCommonDivisor
 
